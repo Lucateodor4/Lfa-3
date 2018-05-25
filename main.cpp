@@ -22,8 +22,8 @@ struct Gramatica
 
 bool CFG(Gramatica G,char *cuvant,char *cuvFunctie){
     bool apartine = false;
-    char aux[30],aux2[10],aux3[15];
-    strcpy(aux3,cuvFunctie);
+    char auxiliar[30],auxiliar2[10],auxiliar3[15];
+    strcpy(auxiliar3,cuvFunctie);
     if(strcmp (cuvant,cuvFunctie)==0)
     {
         apartine=true;
@@ -48,26 +48,26 @@ bool CFG(Gramatica G,char *cuvant,char *cuvFunctie){
                 {
                     for(int j=0;j<G.nrNeterminale && !apartine ;j++)
                     {
-                        strcpy(aux3,cuvFunctie);
+                        strcpy(auxiliar3,cuvFunctie);
                         if(G.Neterminale[j].cuvant[0]==cuvFunctie[i])
                         {
                             gasit=true;
-                            strncpy(aux2,cuvFunctie,i);
-                            aux2[i]='\0';
-                            strcpy(aux3,cuvFunctie+i+1);
+                            strncpy(auxiliar2,cuvFunctie,i);
+                            auxiliar2[i]='\0';
+                            strcpy(auxiliar3,cuvFunctie+i+1);
                             for(int k=0;k<G.Neterminale[j].nrAlternative && !apartine ;k++)
                             {
-                                strcpy(aux,aux2);
+                                strcpy(auxiliar,auxiliar2);
                                 if(G.Neterminale[j].alternative[k][0]=='x')
                                 {
-                                    strcat(aux,aux3);
-                                    apartine=CFG(G,cuvant,aux);
+                                    strcat(auxiliar,auxiliar3);
+                                    apartine=CFG(G,cuvant,auxiliar);
                                 }
                                 else
                                 {
-                                    strcat(aux,G.Neterminale[j].alternative[k]);
-                                    strcat(aux,aux3);
-                                    apartine=CFG(G,cuvant,aux);
+                                    strcat(auxiliar,G.Neterminale[j].alternative[k]);
+                                    strcat(auxiliar,auxiliar3);
+                                    apartine=CFG(G,cuvant,auxiliar);
                                 }
                             }
                         }
